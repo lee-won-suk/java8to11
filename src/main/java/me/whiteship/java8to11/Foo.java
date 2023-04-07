@@ -1,51 +1,21 @@
 package me.whiteship.java8to11;
 
-import java.util.function.*;
+public interface Foo {
+    void printName();
 
-public class Foo {
-    public static void main(String[] args) {
-
-
-        Foo foo = new Foo();
-        foo.run();
-
+    /**
+     * @implSpec 이 구현체는 getName()으로 가져온 문자열을 대문자로 바꿔 출력한다.
+     */
+    default void printNameUpperCase() {
+        System.out.println(getName().toUpperCase());
     }
 
-    private void run() {
+    String getName();
 
-        int baseNumber = 10;
-
-
-/*        Class LocalClass {
-
-            void printBaseNumber() {
-                System.out.println(baseNumber);
-            }
-        }*/
-
-
-        /**
-         *  익명 클래스 내부에서 로컬변수 참조하는 방법
-         */
-      /*   Consumer<Integer> integerConsumer = new Consumer<Integer>() {
-
-           @Override
-            public void accept(Integer Integer) {
-                System.out.println(baseNumber);
-            }
-
-
-        };
-
-
-
-        IntConsumer printInt = (i) -> {
-            System.out.println(i + baseNumber);
-        };
-
-        printInt.accept(10);
-        baseNumber++;
-
-    */
+    static void printAnything() {
+        System.out.println("Foo");
     }
+
+     String toString();
+
 }

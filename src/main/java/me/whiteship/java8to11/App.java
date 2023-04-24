@@ -1,18 +1,29 @@
 package me.whiteship.java8to11;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.time.Duration;
+import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
 
-  /*      Foo foo = new DefaultFoo("keesun");
-        foo.printName();
-        foo.printNameUpperCase();
-*/
-        Foo.printAnything();
+        List<OnlineClass> springClasses = new ArrayList<>();
+        springClasses.add(new OnlineClass(1, "spring boot", true));
+        springClasses.add(new OnlineClass(2, "spring data jpa", true));
+        springClasses.add(new OnlineClass(3, "spring mvc", false));
+        springClasses.add(new OnlineClass(4, "spring core", false));
+        springClasses.add(new OnlineClass(5, "rest api development ", false));
+
+
+        OnlineClass spring_boot = new OnlineClass(1, "spring boot", true);
+
+        Optional<Progress> progress = spring_boot.getProgress();
+        progress.ifPresent(p -> System.out.println(p.getStudyDuration()));
+
     }
 }

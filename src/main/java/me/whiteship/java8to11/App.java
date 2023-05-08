@@ -1,47 +1,46 @@
 package me.whiteship.java8to11;
 
-import java.time.Duration;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+      /*  MyThread myThread = new MyThread();
+        myThread.start();
 
-        List<OnlineClass> springClasses = new ArrayList<>();
-        springClasses.add(new OnlineClass(1, "spring boot", true));
-   /*     springClasses.add(new OnlineClass(2, "spring data jpa", true));
-        springClasses.add(new OnlineClass(3, "spring mvc", false));
-        springClasses.add(new OnlineClass(4, "spring core", false));*/
-        springClasses.add(new OnlineClass(5, "rest api development ", false));
-
-        Optional<OnlineClass> optional = springClasses.stream()
-                .filter(oc -> oc.getTitle().startsWith("spring"))
-                .findFirst();
-
-        //OnlineClass onlineClass = optional.orElseGet(App::createNewJpaClassess);
-
-        //OnlineClass onlineClass = optional.orElseThrow(IllegalStateException::new);
-
-        /*Optional<OnlineClass> onlineClass = optional.filter(OnlineClass::isClosed);
-        System.out.println(onlineClass.isEmpty());*/
-
-        Optional<Integer> integer = optional.map(oc -> oc.getId());
-        System.out.println(integer.isPresent());
+        System.out.println("Hello!");*/
 
 
-        Optional<Progress> progress = optional.flatMap(OnlineClass::getProgress);
+      Thread thread = new Thread(() -> {
 
-        Optional<Optional<Progress>> progress1 = optional.map(OnlineClass::getProgress);
-        Optional<Progress> progress2 = progress1.orElseThrow();
+              System.out.println("Thread: " + Thread.currentThread().getName());
+              try {
+                  Thread.sleep(3000L);
+              } catch (InterruptedException e) {
+                  throw new IllegalStateException(e);
+              }
+        });
+      thread.start();
+
+      System.out.println("Hello: " + Thread.currentThread().getName());
+      thread.join();
+        System.out.println(thread + " is finished");
 
     }
-    private static OnlineClass createNewJpaClassess() {
-        System.out.println("creating new online class");
-    return new OnlineClass(10,"New class",false);
-    }
+
+/*    static class MyThread extends Thread {
+        @Override
+        public void run() {
+            System.out.println("Thread: " + Thread.currentThread().getName());
+        }
+    }*/
 }

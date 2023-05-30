@@ -8,55 +8,64 @@ import java.util.function.*;
 public class Foo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        /*ExecutorService executorService = Executors.newSingleThreadExecutor();
+       /* CompletableFuture<String> future = CompletableFuture.completedFuture("keesun");
+        System.out.println(future.get());
+*/
+        /*CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+            System.out.println("Hello " + Thread.currentThread().getName());
+        });
+        future.get();
+*/
 
-        Callable<String> hello = () -> {
-            Thread.sleep(2000L);
+        /**
+         * thenApply
+         */
+/*
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+            System.out.println("Hello " + Thread.currentThread().getName());
             return "Hello";
-        };
+        }).thenApply((s) -> {
+            System.out.println(Thread.currentThread().getName());
+            return s.toUpperCase();
+        });
+*/
 
-        Future<String> helloFuture = executorService.submit(hello);
-        System.out.println(helloFuture.isDone());
-
-        System.out.println("Started! ");
-
-        helloFuture.cancel(true);
-
-        //helloFuture.get();
-        System.out.println(helloFuture.isDone());
-        System.out.println("End!");
-        executorService.shutdown();
-        */
-
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
-
-        Callable<String> hello = () -> {
-            Thread.sleep(2000L);
+        /**
+         * thenAccept
+         */
+       /* CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
+            System.out.println("Hello " + Thread.currentThread().getName());
             return "Hello";
-        };
+        }).thenAccept((s) -> {
+            System.out.println(Thread.currentThread().getName());
+            System.out.println(s.toUpperCase());
+        });
+*/
 
-        Callable<String> java = () -> {
-            Thread.sleep(3000L);
-            return "Java";
-        };
+        /**
+         * thenRun
+         */
+     /*   CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
+            System.out.println("Hello " + Thread.currentThread().getName());
+            return "Hello";
+        }).thenRun(() -> {
+            System.out.println(Thread.currentThread().getName());
+        });
 
-        Callable<String> keesun = () -> {
-            Thread.sleep(1000L);
-            return "keesun";
-        };
-
-        /*List<Future<String>> futures = executorService.invokeAll(Arrays.asList(hello, java, keesun));
-
-        for ( Future<String> f : futures) {
-            System.out.println(f.get());
-        }*/
-
-        String s = executorService.invokeAny(Arrays.asList(hello, java, keesun));
-        System.out.println(s);
+        System.out.println(future.get());*/
 
 
+/*        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
+            System.out.println("Hello " + Thread.currentThread().getName());
+            return "Hello";
+        }, executorService).thenRunAsync(() -> {
+            System.out.println(Thread.currentThread().getName());
+        }, executorService);
 
-        executorService.shutdown();
+        System.out.println(future.get());*/
+
+
 
 
     }
